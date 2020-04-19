@@ -31,10 +31,10 @@ class SSD(nn.Module):
         self.num_classes = num_classes
         self.cfg = (coco, voc)[num_classes == 21]
         self.priorbox = PriorBox(self.cfg)
-        self.priors = Variable(self.priorbox.forward(), volatile=True)
-        #with torch.no_grad():
-        #    self.priors = self.priorbox.forward()
-        #return self.priors
+        #self.priors = Variable(self.priorbox.forward(), volatile=True)
+        with torch.no_grad():
+            self.priors = self.priorbox.forward()
+        return self.priors
         self.size = size
 
         # SSD network
